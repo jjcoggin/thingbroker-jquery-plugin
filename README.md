@@ -85,17 +85,20 @@ $('.class').broker({src:'imagesrc', to: 'class2'}); Will update the src paramete
 
 
 ## IMPLEMENTED KEY-DATA PAIRS AND THEIR DOM OPERATIONS
+
+If you're using raw events through your own custom plugin and want to communicate with objects using the Thing Broker Jquery plugin these are the implemented key-data pairs (more info at https://github.com/magic-liam/thingbroker)
+
 ```
-THE EVENT <append>data</append> 
+THE EVENT {"append": "data"}
 Appends "data" to a brokerized <div class'data'> as <p>data</p> 
 Appends "data" to a brokerized <ul class 'data'> as <li>data</li>
 ```
 ```
-THE EVENT <remove>data</remove>
+THE EVENT {"remove": "data"}
 Removes the element that contains the given data from the object listening to the event.
 ```
 ```
-THE EVENT <src>data</src>
+THE EVENT {"src": "data"}
 Updates the src="" attribute of an image object listening to the event: <img src='data'></img>
 ```
 
