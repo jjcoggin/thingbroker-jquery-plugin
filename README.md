@@ -8,6 +8,7 @@ Broker dependency: < 1.4.0
 ## CHANGE LOG
 2012.08.01-Roberto: First Version of this Requirements Document.
 2012.08.09-Roberto: First Version of the plugin.
+2012.10.29-Roberto: Second Version of the plugin using the new Thing Broker
 
 ## INTRODUCTION
 
@@ -19,7 +20,11 @@ Mollie stands before a large display and wants to move content from a handheld d
 
 ## CLIENT-TO-CLIENT SOLUTION
 
-Mollie is moving content from one web-browser (her mobile) to another web-browser (the one running a large display application), often both applications are developed in different languages (ruby, php, java) and connecting them together requires server-dependent hooks and listeners. By taking the mental model literally we propose exposing web-clients to each other through a single third party service, i.e. the Magic Broker, without the need of server-dependent modifications. This allows for ANY web-browser, service, or application to modify and access shared data seamingless and to make development of small applications a snap.
+Mollie is moving content from one web-browser (her mobile) to another web-browser (the one running a large display application), often both applications are developed in different languages (ruby, php, java) and connecting them together requires server-dependent hooks and listeners. By taking the mental model literally we propose exposing web-clients to each other through a single third party service without the need of server-dependent modifications. This allows for ANY web-browser, service, or application to modify and access shared data seamingless and to make development of small applications a snap.
+
+## DEPENDENCIES
+
+The current plugin depends on the Thing Broker (https://github.com/magic-liam/thingbroker). You can run a self version of the broker on your local machine, or use the provided testing version available at http://kimberly.magic.ubc.ca/thingbroker-web. Downloading this project and running the examples will work out of the box, as the testing version of the Thing Broker is the default backend for this plugin.
 
 ## SECURITY CONCERNS AND SCALABILITY
 
@@ -94,6 +99,3 @@ THE EVENT <src>data</src>
 Updates the src="" attribute of an image object listening to the event: <img src='data'></img>
 ```
 
-## LOG AND NOTES
-
-* The current version is a transitional version that will only work with Magic Broker Version<1.4.0
