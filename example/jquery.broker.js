@@ -22,8 +22,8 @@
   $.fn.broker = function(params) {
     var now = (new Date).getTime();
     params = $.extend({
-	url:'http://kimberly.magic.ubc.ca/thingbroker-web',
-//	url:'http://kimberly.magic.ubc.ca:8080/thingbroker-web/',
+//	url:'http://kimberly.magic.ubc.ca/thingbroker-web',
+	url:'http://kimberly.magic.ubc.ca:8080/thingbroker-web/',
 //	url:'http://localhost:8080/thingbroker-web/',
 	name: this.attr('class'),
 	topic: this.attr('class'), //TODO: change "topic" to "name"
