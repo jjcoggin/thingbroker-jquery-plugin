@@ -24,7 +24,7 @@ Mollie is moving content from one web-browser (her mobile) to another web-browse
 
 ## DEPENDENCIES
 
-The current plugin depends on the Thing Broker (https://github.com/magic-liam/thingbroker). You can run a self version of the broker on your local machine, or use the provided testing version available at http://kimberly.magic.ubc.ca/thingbroker-web. Downloading this project and running the examples will work out of the box, as the testing version of the Thing Broker is the default backend for this plugin.
+The current plugin depends on the Thing Broker (https://github.com/magic-liam/thingbroker). You can run a self version of the broker on your local machine, or use the provided testing version available at http://kimberly.magic.ubc.ca:8080/thingbroker-web. Downloading this project and running the examples will work out of the box, as the testing version of the Thing Broker is the default backend for this plugin.
 
 ## SECURITY CONCERNS AND SCALABILITY
 
