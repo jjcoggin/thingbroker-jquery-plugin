@@ -22,9 +22,7 @@
   $.fn.broker = function(params) {
     var now = (new Date).getTime();
     params = $.extend({
-//	url:'http://kimberly.magic.ubc.ca/thingbroker-web',
 	url:'http://kimberly.magic.ubc.ca:8080/thingbroker-web/',
-//	url:'http://localhost:8080/thingbroker-web/',
 	name: this.attr('class'),
 	topic: this.attr('class'), //TODO: change "topic" to "name"
         listen: false,	
@@ -38,11 +36,13 @@
     this.each(function(){
       var obj = $(this);
 
-      if (!params.listen && (params.remove || params.append || params.src) ) {
+      if (!params.listen && (params.remove || params.append || params.src || params.prepend || params.before) ) {
         params.topic = params.to;
         params = containerSafeTopic(params, params.topic);
         if (params.remove){params.event_key = 'remove';params.event_value = params.remove;};
 	if (params.append){params.event_key = 'append';params.event_value = params.append;};
+	if (params.prepend){params.event_key = 'prepend';params.event_value = params.prepend;};
+	if (params.before){params.event_key = 'before';params.event_value = params.before;};
 	if (params.src){params.event_key = 'src';params.event_value = params.src;};
 	subscribe(params);
 	sendEvent(params,obj);
@@ -57,25 +57,11 @@
       return this;
     }); 
 
-
-/*    
-    function getEvents(params, obj) {
-      $.ajax({
-        type: "GET",             
-        url: "brokerproxy.php?broker_url="+params.url+"&action=receive_event&clientID="+params.client+"&topic="+params.topic,
-        dataType: "xml",      
-        success: function(xml) {
-      	  updateElement(xml, params, obj);
-        }
-      });    
-    };
-*/    
     function getEvents(params, obj) {
       $.ajax({
         type: "GET",
         crossDomain: true,
-//http://localhost:8080/thingbroker-web/events/thing/messageboard?requester=messageboard
-	url: params.url+"/events/thing/"+params.topic+"?requester="+params.topic+"&timeout=10&after="+params.timestamp,  //TODO: remove timeout      
+	url: params.url+"/events/thing/"+params.topic+"?requester="+params.topic+"&timeout=20&after="+params.timestamp,
         dataType: "JSON",   
         success: function(json) {
       	  updateElement(json, params, obj);
@@ -115,8 +101,23 @@
 		   obj.append("<p>"+decodeURI(value)+"</p>");
 		}
 	     }
-	     if (key == 'remove') {
-                
+	     if (key == 'before') {
+		if ( jQuery(obj).is('ul') ) {
+		   obj.before("<li>"+decodeURI(value)+"</li>");
+		}
+		if ( jQuery(obj).is('div') ) {
+		   obj.before("<p>"+decodeURI(value)+"</p>");
+		}
+	     }
+	     if (key == 'prepend') {
+		if ( jQuery(obj).is('ul') ) {
+		   obj.prepend("<li>"+decodeURI(value)+"</li>");
+		}
+		if ( jQuery(obj).is('div') ) {
+		   obj.prepend("<p>"+decodeURI(value)+"</p>");
+		}
+	     }
+	     if (key == 'remove') {                
 	        if ( jQuery(obj).is('ul') ) {
 	           $("li:contains('"+decodeURI(value)+"')").remove();	  
 	        }
@@ -127,6 +128,9 @@
  	     if (key == 'src') {
                 obj.attr("src", value);
              }
+
+
+
              params.timestamp = jsonobj.serverTimestamp;//update object with latest timestamp   
           });
        });
